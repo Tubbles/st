@@ -1,0 +1,53 @@
+From c4fdc12954218d3ab004fa143753a269f83f94f4 Mon Sep 17 00:00:00 2001
+From: Tubbles <jae91m@gmail.com>
+Date: Sat, 26 Oct 2019 23:06:19 +0200
+Subject: [PATCH] Bar cursor, 1 px, 110x30 char default window, better
+ delimiters
+
+---
+ config.def.h | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/config.def.h b/config.def.h
+index 83c42b3..f823cba 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -38,7 +38,7 @@ static float chscale = 1.0;
+  *
+  * More advanced example: L" `'\"()[]{}"
+  */
+-wchar_t *worddelimiters = L" ";
++wchar_t *worddelimiters = L" `'\"()[]{}:";
+ 
+ /* selection timeouts (in milliseconds) */
+ static unsigned int doubleclicktimeout = 300;
+@@ -60,7 +60,7 @@ static unsigned int blinktimeout = 800;
+ /*
+  * thickness of underline and bar cursors
+  */
+-static unsigned int cursorthickness = 2;
++static unsigned int cursorthickness = 1;
+ 
+ /*
+  * bell volume. It must be a value between -100 and 100. Use 0 for disabling
+@@ -134,14 +134,14 @@ static unsigned int defaultrcs = 257;
+  * 6: Bar ("|")
+  * 7: Snowman ("☃")
+  */
+-static unsigned int cursorshape = 2;
++static unsigned int cursorshape = 6;
+ 
+ /*
+  * Default columns and rows numbers
+  */
+ 
+-static unsigned int cols = 80;
+-static unsigned int rows = 24;
++static unsigned int cols = 110;
++static unsigned int rows = 30;
+ 
+ /*
+  * Default colour and shape of the mouse cursor
+-- 
+2.35.1
+

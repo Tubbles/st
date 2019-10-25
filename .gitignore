@@ -1,0 +1,5 @@
+# Ignore output files
+config.h
+st
+st.o
+x.o
