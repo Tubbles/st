@@ -1,0 +1,9 @@
+Set up local repo:
+git remote add upstream http://git.suckless.org/st
+git fetch upstream
+
+Build and run:
+rm -f config.h && make clean all && tic -sx st.info && ./st && make clean && rm -f config.h
+
+Install:
+rm -f config.h && make clean all && sudo make install
