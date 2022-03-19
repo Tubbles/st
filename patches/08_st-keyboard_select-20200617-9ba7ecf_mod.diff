@@ -1,8 +1,21 @@
+From 306ef4aaa0d155879a0eba3369b0e4963159e66b Mon Sep 17 00:00:00 2001
+From: Tubbles <jae91m@gmail.com>
+Date: Sat, 19 Mar 2022 17:19:45 +0100
+Subject: [PATCH] Add keyboard selection
+
+---
+ config.def.h |   1 +
+ st.c         | 222 +++++++++++++++++++++++++++++++++++++++++++++++++++
+ st.h         |   1 +
+ win.h        |   3 +
+ x.c          |  14 ++++
+ 5 files changed, 241 insertions(+)
+
 diff --git a/config.def.h b/config.def.h
-index 6f05dce..54612d1 100644
+index 396b4af..abe7d02 100644
 --- a/config.def.h
 +++ b/config.def.h
-@@ -199,6 +199,7 @@ static Shortcut shortcuts[] = {
+@@ -207,6 +207,7 @@ static Shortcut shortcuts[] = {
  	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
  	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
  	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
@@ -11,7 +24,7 @@ index 6f05dce..54612d1 100644
  
  /*
 diff --git a/st.c b/st.c
-index ef8abd5..0c6c6ca 100644
+index f43cfd3..fd0e130 100644
 --- a/st.c
 +++ b/st.c
 @@ -16,6 +16,8 @@
@@ -23,7 +36,7 @@ index ef8abd5..0c6c6ca 100644
  
  #include "st.h"
  #include "win.h"
-@@ -2487,6 +2489,9 @@ tresize(int col, int row)
+@@ -2555,6 +2557,9 @@ tresize(int col, int row)
  	int *bp;
  	TCursor c;
  
@@ -33,7 +46,7 @@ index ef8abd5..0c6c6ca 100644
  	if (col < 1 || row < 1) {
  		fprintf(stderr,
  		        "tresize: error resizing to %dx%d\n", col, row);
-@@ -2612,3 +2617,220 @@ redraw(void)
+@@ -2680,3 +2685,220 @@ redraw(void)
  	tfulldirt();
  	draw();
  }
@@ -255,19 +268,19 @@ index ef8abd5..0c6c6ca 100644
 +	return 0;
 +}
 diff --git a/st.h b/st.h
-index 3d351b6..2d1a11b 100644
+index 519b9bd..a73e704 100644
 --- a/st.h
 +++ b/st.h
 @@ -110,6 +110,7 @@ size_t utf8encode(Rune, char *);
  void *xmalloc(size_t);
  void *xrealloc(void *, size_t);
- char *xstrdup(char *);
-+int  trt_kbdselect(KeySym, char *, int);
+ char *xstrdup(const char *);
++int trt_kbdselect(KeySym, char *, int);
  
- /* config.h globals */
- extern char *utmp;
+ int xgetcolor(int x, unsigned char *r, unsigned char *g, unsigned char *b);
+ 
 diff --git a/win.h b/win.h
-index a6ef1b9..9a47fbb 100644
+index e6e4369..4916347 100644
 --- a/win.h
 +++ b/win.h
 @@ -21,6 +21,7 @@ enum win_mode {
@@ -278,7 +291,7 @@ index a6ef1b9..9a47fbb 100644
  };
  
  void xbell(void);
-@@ -36,4 +37,6 @@ void xsetmode(int, unsigned int);
+@@ -37,4 +38,6 @@ void xsetmode(int, unsigned int);
  void xsetpointermotion(int);
  void xsetsel(char *);
  int xstartdraw(void);
@@ -286,10 +299,10 @@ index a6ef1b9..9a47fbb 100644
 +void keyboard_select(const Arg *);
  void xximspot(int, int);
 diff --git a/x.c b/x.c
-index 210f184..b77ce54 100644
+index 8e00a8b..48025f1 100644
 --- a/x.c
 +++ b/x.c
-@@ -1800,6 +1800,12 @@ kpress(XEvent *ev)
+@@ -1949,6 +1949,12 @@ kpress(XEvent *ev)
  		len = XmbLookupString(xw.ime.xic, e, buf, sizeof buf, &ksym, &status);
  	else
  		len = XLookupString(e, buf, sizeof buf, &ksym, NULL);
@@ -302,7 +315,7 @@ index 210f184..b77ce54 100644
  	/* 1. shortcuts */
  	for (bp = shortcuts; bp < shortcuts + LEN(shortcuts); bp++) {
  		if (ksym == bp->keysym && match(bp->mod, e->state)) {
-@@ -1977,6 +1983,14 @@ usage(void)
+@@ -2126,6 +2132,14 @@ usage(void)
  	    " [stty_args ...]\n", argv0, argv0);
  }
  
@@ -317,3 +330,6 @@ index 210f184..b77ce54 100644
  int
  main(int argc, char *argv[])
  {
+-- 
+2.35.1
+

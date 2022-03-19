@@ -27,22 +27,22 @@ orphans, i.e. they will have no parent process.
  3 files changed, 34 insertions(+)
 
 diff --git a/config.def.h b/config.def.h
-index 6f05dce..9029e8d 100644
+index abe7d02..01bd74b 100644
 --- a/config.def.h
 +++ b/config.def.h
-@@ -199,6 +199,7 @@ static Shortcut shortcuts[] = {
- 	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
+@@ -208,6 +208,7 @@ static Shortcut shortcuts[] = {
  	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
  	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
+ 	{ TERMMOD,              XK_Escape,      keyboard_select,{.i =  0} },
 +	{ TERMMOD,              XK_Return,      newterm,        {.i =  0} },
  };
  
  /*
 diff --git a/st.c b/st.c
-index ebdf360..cb79bc0 100644
+index fd0e130..ea2bf40 100644
 --- a/st.c
 +++ b/st.c
-@@ -153,6 +153,7 @@ typedef struct {
+@@ -155,6 +155,7 @@ typedef struct {
  } STREscape;
  
  static void execsh(char *, char **);
@@ -50,7 +50,7 @@ index ebdf360..cb79bc0 100644
  static void stty(char **);
  static void sigchld(int);
  static void ttywriteraw(const char *, size_t);
-@@ -1060,6 +1061,37 @@ tswapscreen(void)
+@@ -1055,6 +1056,37 @@ tswapscreen(void)
  	tfulldirt();
  }
  
@@ -89,7 +89,7 @@ index ebdf360..cb79bc0 100644
  tscrolldown(int orig, int n)
  {
 diff --git a/st.h b/st.h
-index fa2eddf..b13399b 100644
+index a73e704..a697375 100644
 --- a/st.h
 +++ b/st.h
 @@ -81,6 +81,7 @@ void die(const char *, ...);

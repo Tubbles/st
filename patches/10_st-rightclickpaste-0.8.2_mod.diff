@@ -1,0 +1,27 @@
+From 111e5d0311f174592ccecee2af11067103abaee7 Mon Sep 17 00:00:00 2001
+From: aleks <aleks.stier@icloud.com>
+Date: Sun, 11 Aug 2019 03:15:26 +0200
+Subject: [PATCH] Make right-click paste
+
+Pressing right-click pastes from the primary-selection.
+If combined with the clipboard-patch right-click pastes from the clipboard.
+Middle-click does nothing.
+---
+ config.def.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/config.def.h b/config.def.h
+index 01bd74b..9372859 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -182,7 +182,7 @@ static uint forcemousemod = ShiftMask;
+  */
+ static MouseShortcut mshortcuts[] = {
+ 	/* mask                 button   function        argument       release */
+-	{ XK_ANY_MOD,           Button2, selpaste,       {.i = 0},      1 },
++	{ XK_ANY_MOD,           Button3, selpaste,       {.i = 0},      1 },
+ 	{ ShiftMask,            Button4, ttysend,        {.s = "\033[5;2~"} },
+ 	{ XK_ANY_MOD,           Button4, ttysend,        {.s = "\031"} },
+ 	{ ShiftMask,            Button5, ttysend,        {.s = "\033[6;2~"} },
+--
+2.22.0

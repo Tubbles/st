@@ -1,6 +1,6 @@
-From be351231fcb5904f983900b2e2a3038e18f36623 Mon Sep 17 00:00:00 2001
+From d1d2ecf12d3880747d5e87246fd3dacb761040bf Mon Sep 17 00:00:00 2001
 From: Tubbles <jae91m@gmail.com>
-Date: Sun, 19 Jan 2020 12:55:32 +0100
+Date: Sat, 19 Mar 2022 18:29:16 +0100
 Subject: [PATCH] Single step scroll back with arrow keys
 
 ---
@@ -8,18 +8,18 @@ Subject: [PATCH] Single step scroll back with arrow keys
  1 file changed, 2 insertions(+)
 
 diff --git a/config.def.h b/config.def.h
-index f823cba..b9118c0 100644
+index e5129e4..a783ca0 100644
 --- a/config.def.h
 +++ b/config.def.h
-@@ -190,6 +190,8 @@ static Shortcut shortcuts[] = {
- 	{ TERMMOD,              XK_C,           clipcopy,       {.i =  0} },
- 	{ TERMMOD,              XK_V,           clippaste,      {.i =  0} },
- 	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
+@@ -209,6 +209,8 @@ static Shortcut shortcuts[] = {
+ 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
+ 	{ TERMMOD,              XK_Escape,      keyboard_select,{.i =  0} },
+ 	{ TERMMOD,              XK_Return,      newterm,        {.i =  0} },
 +	{ ShiftMask,            XK_Up,          kscrollup,      {.i =  1} },
 +	{ ShiftMask,            XK_Down,        kscrolldown,    {.i =  1} },
  	{ ShiftMask,            XK_Page_Up,     kscrollup,      {.i = -1} },
  	{ ShiftMask,            XK_Page_Down,   kscrolldown,    {.i = -1} },
- 	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
+ };
 -- 
 2.35.1
 

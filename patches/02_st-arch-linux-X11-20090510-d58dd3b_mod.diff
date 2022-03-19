@@ -1,0 +1,27 @@
+From 8adbcd3ab1fb07f93302d1e850cb544e9135fa9d Mon Sep 17 00:00:00 2001
+From: Tubbles <jae91m@gmail.com>
+Date: Sat, 19 Mar 2022 16:52:02 +0100
+Subject: [PATCH] Change X11 include dirs to Arch Linux correct ones
+
+---
+ config.mk | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/config.mk b/config.mk
+index 4c4c5d5..18a79e3 100644
+--- a/config.mk
++++ b/config.mk
+@@ -7,8 +7,8 @@ VERSION = 0.8.5
+ PREFIX = /usr/local
+ MANPREFIX = $(PREFIX)/share/man
+ 
+-X11INC = /usr/X11R6/include
+-X11LIB = /usr/X11R6/lib
++X11INC = /usr/include/X11
++X11LIB = /usr/lib/X11
+ 
+ PKG_CONFIG = pkg-config
+ 
+-- 
+2.35.1
+
